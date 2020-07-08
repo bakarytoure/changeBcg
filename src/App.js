@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import "./App.scss";
 
-function App() {
+function App(props) {
+  useEffect(() => {
+    const interval = setInterval(function () {
+      var randomcolor = Math.floor(Math.random() * 16777215).toString(16);
+      document.body.style.backgroundColor = "#" + randomcolor;
+      var getcolor = (document.getElementById("app").style.backgroundColor =
+        "#" + randomcolor);
+      console.log(getcolor);
+      return getcolor;
+    }, 5000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App container-fluid" id="app">
+      <h2 className="text-center pt-5 text-white">
+        Update background Color every 5 seconds
+      </h2>
     </div>
   );
 }
